@@ -1,0 +1,66 @@
+@CHARSET "UTF-8";
+
+.mytable {
+	width: 60%;
+	color: #0066cc;
+	background-color: #eef6fe;
+	font-size: 1em;
+	color: #05B;
+	border: 1px solid #AEDEF2;
+	text-align: center;
+	margin-left: 2%;
+}
+
+.seatarea {
+	text-align:center;
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.myseat {
+	font-size: 1em;
+	margin-left: 1em;
+	margin-top: 1em;
+	padding: 10px 25px;
+	font-family: "ambleregular";
+	background: #FC7D01;
+	text-transform: uppercase;
+	color: #FFF;
+	border: none;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	-webkit-apperance: none;
+	width: 20px;
+	height: 10px;
+}
+
+.tokenseat {
+	font-size: 1em;
+	margin-left: 1em;
+	margin-top: 1em;
+	padding: 10px 25px;
+	font-family: "ambleregular";
+	background: #000000;
+	text-transform: uppercase;
+	color: #FFF;
+	border: none;
+	text-decoration: none;
+	onclick: return false;
+	cursor: pointer;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	-webkit-apperance: none;
+	width: 20px;
+	height: 10px
+}
+
+.mylabel{
+	width:100px;
+	height: 50px;
+}
