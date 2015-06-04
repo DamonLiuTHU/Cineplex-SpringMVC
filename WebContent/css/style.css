@@ -993,9 +993,9 @@ body {
 	padding-bottom: 30px;
 }
 
-.contact-form div {
+/* .contact-form div {
 	padding: 5px 0;
-}
+} */
 
 .contact-form span {
 	display: block;
@@ -1005,10 +1005,10 @@ body {
 	font-family: verdana, arial, helvetica, helve, sans-serif;
 }
 
-.contact-form input[type="text"], .contact-form textarea {
+/* .contact-form input[type="text"], .contact-form textarea {
 	padding: 8px;
 	display: block;
-	width: 98%;
+
 	background: none;
 	border: 1px solid #CACACA;
 	outline: none;
@@ -1017,7 +1017,7 @@ body {
 	font-weight: bold;
 	font-family: Arial, Helvetica, sans-serif;
 	-webkit-appearance: none;
-}
+} */
 
 .contact-form textarea {
 	resize: none;
@@ -1178,9 +1178,9 @@ body {
 		width: 94%;
 		padding: 3%;
 	}
-	.contact-form input[type="text"], .contact-form textarea {
-		width: 95%;
-	}
+/* 	.contact-form input[type="text"], .contact-form textarea { */
+/* 		width: 95%; */
+/* 	} */
 }
 
 @media only screen and (max-width: 480px) {
@@ -1269,7 +1269,7 @@ body {
 		font-size: 0.8em;
 		padding: 5px 0;
 	}
-	.contact-form input[type="text"], .contact-form textarea {
-		width: 93%;
-	}
+/* 	.contact-form input[type="text"], .contact-form textarea { */
+/* 		width: 93%; */
+/* 	} */
 }
