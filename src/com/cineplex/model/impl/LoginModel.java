@@ -5,11 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.cineplex.model.encrype.MD5;
+
 public class LoginModel {
 	public boolean isPwValid(String phone, String pw) {
 
 		Connection con = DBTools.getConnection();
 		try {
+			pw = MD5.getMD5(pw.getBytes());
 			PreparedStatement stmt = con
 					.prepareStatement("select * from user where phone=? and password=?");
 			stmt.setString(1, phone);

@@ -1,18 +1,28 @@
 package com.cineplex.model.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.mail.MessagingException;
+
+import com.cineplex.model.encrype.MD5;
+import com.cineplex.tools.MailFactory;
+import com.cineplex.tools.MailSender;
+import com.cineplex.tools.MailSenderType;
 
 public class RegisterModel {
 	public boolean isIDExist(String id){
 		Connection con = DBTools.getConnection();
 		try {
-			Statement stmt = con.createStatement();
-			String sql = "select * from user where phone="+id;
-			stmt.execute(sql);
-			ResultSet rs = stmt.getResultSet();
+
+			String sql = "select * from user where phone=?";
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setString(1, id);
+			pst.execute();
+			ResultSet rs = pst.getResultSet();
 			boolean exist = rs.first();
 			con.close();
 			return exist;
@@ -25,14 +35,40 @@ public class RegisterModel {
 	}
 	public void saveRegisterInfo(String phone,String pw){
 		Connection con = DBTools.getConnection();
+		PreparedStatement pst = null;
 		try {
-			Statement stmt = con.createStatement();
-			String sql = "insert into user (phone,password) values ("+phone+","+pw+")";
-			stmt.execute(sql);
-			con.close();
+			int code = (int) (Math.random()*9000+1000);
+//			Statement stmt = con.createStatement();
+			String sql = "insert into user(phone,password,activatecode) values (?,?,?)";
+			pst = con.prepareStatement(sql);
+			pst.setString(1, phone);
+			String md5 = MD5.getMD5(pw.getBytes());
+			pst.setString(2, md5);
+			pst.setString(3, code+"");
+			boolean success = pst.execute();
+//			if(success){
+				System.out.println("Sending Activate Code ==========================");
+				MailSender sender = MailFactory.getSender(MailSenderType.SERVICE);
+				try {
+					sender.send(phone, code+"");
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+//			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				pst.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
