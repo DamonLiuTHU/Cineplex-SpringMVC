@@ -47,20 +47,6 @@ public class UserController {
 	 * @param args
 	 */
 
-	@RequestMapping("/register")
-	public String registNewUser(RegisterForm rf) {
-		// System.out.println(rf.toString());
-		String phone = rf.getPhone();
-		String pw = rf.getPassword();
-		RegisterModel rm = new RegisterModel();
-		boolean exist = rm.isIDExist(phone);
-		if (exist) {
-			return "registerfail";
-		} else {
-			rm.saveRegisterInfo(phone, pw);
-			return "success";
-		}
-	}
 
 	@RequestMapping("/login")
 	public String login(LoginForm lf, HttpSession session,

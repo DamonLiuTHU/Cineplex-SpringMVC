@@ -72,4 +72,30 @@ public class RegisterModel {
 		}
 		
 	}
+	
+	
+	public static boolean isCodeValid(String phone,String code){
+		Connection con = DBTools.getConnection();
+		try{
+			String sql = "select null from user where phone=? and code=?";
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setString(1, phone);
+			pst.setString(2, code);
+			pst.execute();
+			ResultSet rs = pst.getResultSet();
+			return rs.first();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return false;
+	}
 }

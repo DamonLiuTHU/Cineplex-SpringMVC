@@ -7,6 +7,10 @@ public class ActivateForm {
 	public String getPhone() {
 		return phone;
 	}
+	public ActivateForm() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
