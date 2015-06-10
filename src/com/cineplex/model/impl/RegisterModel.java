@@ -51,6 +51,7 @@ public class RegisterModel {
 				MailSender sender = MailFactory.getSender(MailSenderType.SERVICE);
 				try {
 					sender.send(phone, code+"");
+					System.out.println("Send Activate Code Success======================");
 				} catch (MessagingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -77,7 +78,7 @@ public class RegisterModel {
 	public static boolean isCodeValid(String phone,String code){
 		Connection con = DBTools.getConnection();
 		try{
-			String sql = "select null from user where phone=? and code=?";
+			String sql = "select null from user where phone=? and activatecode=?";
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setString(1, phone);
 			pst.setString(2, code);
@@ -94,8 +95,6 @@ public class RegisterModel {
 				e.printStackTrace();
 			}
 		}
-		
-		
 		return false;
 	}
 }
