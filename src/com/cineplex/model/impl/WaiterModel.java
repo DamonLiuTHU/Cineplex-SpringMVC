@@ -16,9 +16,10 @@ public class WaiterModel {
 	
 	public static boolean isPswValid(String id,String psw){
 		String sql = "select * from waiter where waiterId=? and waiterPsw=?";
-		PreparedStatement ps = DBTools.getPreStmt(sql);
-		
+//		PreparedStatement ps = DBTools.getPreStmt(sql);
+		Connection con = DBTools.getConnection();
 		try {
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1,id);
 			ps.setString(2,psw);
 			ps.execute();
@@ -28,6 +29,13 @@ public class WaiterModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -60,6 +68,13 @@ public class WaiterModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return result;

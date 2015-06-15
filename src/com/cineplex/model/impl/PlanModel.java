@@ -1,6 +1,8 @@
 package com.cineplex.model.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class PlanModel {
 
@@ -8,8 +10,10 @@ public class PlanModel {
 			String endtime, String waiterId, String hallId) {
 		
 		String sql = "insert into plans(movieId,start,end,waiterId,hallId) values (?,?,?,?,?)";
-		PreparedStatement ps = DBTools.getPreStmt(sql);
+//		PreparedStatement ps = DBTools.getPreStmt(sql);
+		Connection con = DBTools.getConnection();
 		try{
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1,movieId);
 			ps.setString(2,starttime);
 			ps.setString(3,endtime);
@@ -19,6 +23,13 @@ public class PlanModel {
 			return saveresult;
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return false;

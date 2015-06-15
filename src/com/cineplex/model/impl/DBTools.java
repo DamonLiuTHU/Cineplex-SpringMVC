@@ -31,16 +31,16 @@ public class DBTools {
 
 	}
 	
-	public static PreparedStatement getPreStmt(String sql){
-		PreparedStatement ps = null;
-		try {
-			ps = getConnection().prepareStatement(sql);
-//			ps.closeOnCompletion();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ps;
-	}
+//	public static PreparedStatement getPreStmt(String sql){
+//		PreparedStatement ps = null;
+//		try {
+//			ps = getConnection().prepareStatement(sql);
+////			ps.closeOnCompletion();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return ps;
+//	}
 
 }

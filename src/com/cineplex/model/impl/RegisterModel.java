@@ -109,8 +109,8 @@ public class RegisterModel {
 		}
 	}
 	
-	public boolean isUserVerified(String username){
-		String sql = "select null from user where username=? and activatestate=1";
+	public static boolean isUserVerified(String username){
+		String sql = "select null from user where phone=? and activatestate=1";
 		Connection con = DBTools.getConnection();
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
@@ -121,6 +121,13 @@ public class RegisterModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return false;

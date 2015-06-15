@@ -24,6 +24,13 @@ public class RechargeRecordModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	
 	
@@ -53,7 +60,12 @@ public class RechargeRecordModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return rechargelist;

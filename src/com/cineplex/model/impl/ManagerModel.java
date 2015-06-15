@@ -1,5 +1,6 @@
 package com.cineplex.model.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,9 +16,9 @@ public class ManagerModel {
 	
 	public static boolean isPswValid(LoginForm lf){
 		String sql = "select * from manager where Id=? and Psw=?";
-		PreparedStatement ps = DBTools.getPreStmt(sql);
-		
+		Connection con = DBTools.getConnection();
 		try {
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1,lf.getPhone());
 			ps.setString(2,lf.getPassword());
 			ps.execute();
@@ -26,6 +27,13 @@ public class ManagerModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -33,8 +41,10 @@ public class ManagerModel {
 	public static ArrayList<String> getWaiters(String hallId){
 		String sql = "select DISTINCT waiterId from plans where hallId=? ORDER BY waiterId";
 		ArrayList<String> result = new ArrayList<String>();
-		PreparedStatement ps = DBTools.getPreStmt(sql);
+//		PreparedStatement ps = DBTools.getPreStmt(sql);
+		Connection con = DBTools.getConnection();
 		try{
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1,hallId);
 			ps.execute();
 			ResultSet rs = ps.getResultSet();
@@ -43,6 +53,13 @@ public class ManagerModel {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -51,8 +68,10 @@ public class ManagerModel {
 		// TODO Auto-generated method stub
 		String sql = "select DISTINCT waiterId from plans ORDER BY waiterId";
 		ArrayList<String> result = new ArrayList<String>();
-		PreparedStatement ps = DBTools.getPreStmt(sql);
+//		PreparedStatement ps = DBTools.getPreStmt(sql);
+		Connection con  = DBTools.getConnection();
 		try{
+			PreparedStatement ps = con.prepareStatement(sql);
 			 ps.execute();
 			ResultSet rs = ps.getResultSet();
 			while(rs.next()){
@@ -60,6 +79,13 @@ public class ManagerModel {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -67,8 +93,10 @@ public class ManagerModel {
 	public static PlanForm getPlan(String hallId,String waiterId){
 		String sql = "select * from plans,movie where movie.id=plans.movieId and hallId=? and waiterId=? and plans.state=?";
 //		String sql = "select * from plans,movie where movie.id=plans.movieId and hallId=? and waiterId=? ";
-		PreparedStatement ps = DBTools.getPreStmt(sql);
+//		PreparedStatement ps = DBTools.getPreStmt(sql);
+		Connection con = DBTools.getConnection();
 		try{
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, hallId);
 			ps.setString(2,waiterId);
 			String statekeyword = State.CHECKING.toString();
@@ -91,6 +119,13 @@ public class ManagerModel {
 			return pf;
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
@@ -118,16 +153,16 @@ public class ManagerModel {
 	private static void changeStateForAcceptPlans(String hallId,String waiterId){
 		String sql = "update plans set state=? where hallId=? and waiterId=? and state = ?";
 		String sql_2 = "update plans set state=? where hallId=? and waiterId<>? and state=?";
-		
+		Connection con = DBTools.getConnection();
 		try{
-			PreparedStatement ps = DBTools.getPreStmt(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1,State.ACCEPT.toString());
 			ps.setString(2,hallId);
 			ps.setString(3,waiterId);
 			ps.setString(4,State.CHECKING.toString());
 			ps.execute();
 			
-			ps = DBTools.getPreStmt(sql_2);
+			ps = con.prepareStatement(sql_2);
 			ps.setString(1,State.REFUSED.toString());
 			ps.setString(2,hallId);
 			ps.setString(3,waiterId);
@@ -135,14 +170,23 @@ public class ManagerModel {
 			ps.execute();
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
 	private static ArrayList<Plan> getWaiterPlanList(String hallId, String waiterId){
 		String sql = "select * from plans where hallId=? and waiterId=?";
 		ArrayList<Plan> planlist = new ArrayList<Plan>(10);
-		PreparedStatement ps = DBTools.getPreStmt(sql);
+//		PreparedStatement ps = DBTools.getPreStmt(sql);
+		Connection con = DBTools.getConnection();
 		try {
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, hallId);
 			ps.setString(2, waiterId);
 			ps.execute();
@@ -160,6 +204,13 @@ public class ManagerModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return planlist;
 	}
@@ -171,9 +222,10 @@ public class ManagerModel {
 	public static void refusePlan(String hallId, String waiterId) {
 		// TODO Auto-generated method stub
 		String sql ="update plans set state=? where hallId=? and waiterId=? and state=?";
-		PreparedStatement ps = DBTools.getPreStmt(sql);
-		
+//		PreparedStatement ps = DBTools.getPreStmt(sql);
+		Connection con = DBTools.getConnection();
 		try{
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1,State.REFUSED.toString());
 			ps.setString(2,hallId);
 			ps.setString(3,waiterId);
@@ -181,6 +233,13 @@ public class ManagerModel {
 			ps.execute();
 		}catch(SQLException e){
 			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	

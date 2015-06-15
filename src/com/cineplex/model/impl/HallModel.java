@@ -1,20 +1,21 @@
 package com.cineplex.model.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.cineplex.model.tables.Plan;
-
 public class HallModel {
 
 	public static int getPrice(String periodId) {
-
+		
+		java.sql.Connection con = null;
 		String sql = "select movie.price from movie,hall where hall.Id=? and movie.id=hall.movieId";
 		try {
-			PreparedStatement ps = DBTools.getConnection()
-					.prepareStatement(sql);
+			con = DBTools.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, periodId);
 			ps.execute();
 			ResultSet rs = ps.getResultSet();
@@ -26,6 +27,13 @@ public class HallModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return -1;
@@ -33,14 +41,22 @@ public class HallModel {
 
 	private static void clearHall(String hallId) {
 		String sql = "delete from hall where hallId=?";
+		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = DBTools.getConnection()
+			PreparedStatement ps = con
 					.prepareStatement(sql);
 			ps.setString(1, hallId);
 			ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -66,9 +82,9 @@ public class HallModel {
 																					// 自增属性，不用管。
 																					// left_tickets
 																					// 为默认值51。
-
+		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = DBTools.getConnection()
+			PreparedStatement ps = con
 					.prepareStatement(sql);
 			ps.setInt(1, p.getMovieId());
 			ps.setObject(2, p.getStart());
@@ -78,6 +94,14 @@ public class HallModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} 
+		finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -87,8 +111,9 @@ public class HallModel {
 												// 自增属性，不用管。
 												// left_tickets
 												// 为默认值51。
+		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = DBTools.getConnection()
+			PreparedStatement ps = con
 					.prepareStatement(sql);
 			ps.execute();
 			ResultSet rs = ps.getResultSet();
@@ -100,6 +125,13 @@ public class HallModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}

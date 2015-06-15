@@ -40,6 +40,7 @@ public class RegisterController {
 			String code = form.getCode();
 			if(RegisterModel.isCodeValid(phone, code)){
 				//activate code verified.
+				RegisterModel.setUserVerified(phone);
 				mav.setViewName("/success");
 			}else{
 				//tell user the wrong code.

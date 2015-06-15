@@ -32,6 +32,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return null;
@@ -51,6 +58,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -99,8 +113,14 @@ public class UserModel {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
 	}
 
 	public static void setVIP(String phone) {
@@ -116,6 +136,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		// 修改会员过期时间
@@ -125,8 +152,9 @@ public class UserModel {
 
 	public static String getExpirationDate(String phone) {
 		String sql = "select expiration from user where phone=?";
+		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = DBTools.getConnection()
+			PreparedStatement ps = con
 					.prepareStatement(sql);
 			ps.setString(1, phone);
 			ps.execute();
@@ -138,6 +166,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return null;
@@ -145,12 +180,13 @@ public class UserModel {
 
 	public static boolean isVIPExpired(String phone) {
 
-		String sql = "select null from user where VIP=1 and phone=" + phone;
+		String sql = "select null from user where VIP=1 and phone=?";
 		Connection con = DBTools.getConnection();
-		Statement stmt;
+		PreparedStatement stmt;
 		try {
 
-			stmt = con.createStatement();
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, phone);
 			stmt.execute(sql);
 			ResultSet rs = stmt.getResultSet();
 			boolean is_VIP = rs.first();
@@ -168,6 +204,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return false;
@@ -180,8 +223,9 @@ public class UserModel {
 	private static boolean checkExpiration(String phone) {
 		String sql = "select expiration from user where phone=" + phone;
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Connection con = DBTools.getConnection();
 		try {
-			Statement stmt = DBTools.getConnection().createStatement();
+			Statement stmt = con.createStatement();
 			stmt.execute(sql);
 			ResultSet rs = stmt.getResultSet();
 			while (rs.next()) {
@@ -199,6 +243,13 @@ public class UserModel {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return false;
@@ -218,14 +269,22 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public static int getBalance(String phone) {
 		// TODO Auto-generated method stub
 		String sql = "select balance from user where phone=?";
+		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = DBTools.getConnection()
+			PreparedStatement ps = con
 					.prepareStatement(sql);
 			ps.setString(1, phone);
 			ps.execute();
@@ -238,14 +297,22 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return 0;
 	}
 
 	public static boolean isVIPPaused(String phone) {
 		String sql = "select VIP from user where phone=?";
+		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = DBTools.getConnection()
+			PreparedStatement ps = con
 					.prepareStatement(sql);
 			ps.setString(1, phone);
 			ps.execute();
@@ -258,6 +325,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -274,14 +348,22 @@ public class UserModel {
 		int balance = getBalance(phone);
 		balance += money;
 		String sql = "update user set balance=? where phone=?";
+		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = DBTools.getConnection().prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, balance);
 			ps.setString(2, phone);
 			ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -289,14 +371,23 @@ public class UserModel {
 		int balance = getBalance(phone);
 		balance -= money;
 		String sql = "update user set balance=? where phone=?";
+		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = DBTools.getConnection().prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, balance);
 			ps.setString(2, phone);
 			ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -327,6 +418,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
@@ -359,6 +457,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
@@ -386,6 +491,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
@@ -410,6 +522,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		
@@ -429,6 +548,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -461,6 +587,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -483,6 +616,13 @@ public class UserModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return result;
 	

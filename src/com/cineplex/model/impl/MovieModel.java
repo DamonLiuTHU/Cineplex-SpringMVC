@@ -43,8 +43,9 @@ public class MovieModel {
 	public static ArrayList<Movie> getMovies() {
 		String sql = "select * from movie";
 		ArrayList<Movie> list = new ArrayList<Movie>();
+		Connection con = DBTools.getConnection();
 		try {
-			Statement stmt = DBTools.getConnection().createStatement();
+			Statement stmt = con.createStatement();
 			stmt.execute(sql);
 			ResultSet rs = stmt.getResultSet();
 			while (rs.next()) {
@@ -68,6 +69,13 @@ public class MovieModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return list;
@@ -80,9 +88,9 @@ public class MovieModel {
 		String now_time = df.format(new Date());
 		String sql = "select * from hall where movieId=? and start>?";
 		ArrayList<Hall> list = new ArrayList<Hall>();
+		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = DBTools.getConnection()
-					.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, movieId);
 			ps.setString(2, now_time);
 			ps.execute();
@@ -102,6 +110,13 @@ public class MovieModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return list;
@@ -123,6 +138,13 @@ public class MovieModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return null;
@@ -150,6 +172,13 @@ public class MovieModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return 0;
@@ -169,6 +198,13 @@ public class MovieModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}

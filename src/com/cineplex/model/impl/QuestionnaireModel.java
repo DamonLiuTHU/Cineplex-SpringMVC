@@ -89,8 +89,12 @@ public class QuestionnaireModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
-			
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		
@@ -132,6 +136,13 @@ public class QuestionnaireModel {
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
