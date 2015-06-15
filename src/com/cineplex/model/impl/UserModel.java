@@ -145,7 +145,7 @@ public class UserModel {
 
 	public static boolean isVIPExpired(String phone) {
 
-		String sql = "select null from user where VIP=1 and phone='" + phone+"'";
+		String sql = "select null from user where VIP=1 and phone=" + phone;
 		Connection con = DBTools.getConnection();
 		Statement stmt;
 		try {

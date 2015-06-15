@@ -1,7 +1,6 @@
 package com.cineplex.model.impl;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -19,8 +18,6 @@ public class DBTools {
 					.lookup("java:comp/env/jdbc/cineplex");
 			Connection con = ds.getConnection();
 		
-			
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cineplex", "root", "root");
 			return con;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

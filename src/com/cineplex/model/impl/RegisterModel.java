@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.mail.MessagingException;
 
@@ -95,6 +94,35 @@ public class RegisterModel {
 				e.printStackTrace();
 			}
 		}
+		return false;
+	}
+	
+	public static void setUserVerified(String username){
+		Connection con = DBTools.getConnection();
+		try {
+			PreparedStatement pst = con.prepareStatement("update user set activatestate=1 where phone=?");
+			pst.setString(1, username);
+			pst.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean isUserVerified(String username){
+		String sql = "select null from user where username=? and activatestate=1";
+		Connection con = DBTools.getConnection();
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setString(1, username);
+			pst.execute();
+			ResultSet rs = pst.getResultSet();
+			return rs.first();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 }
