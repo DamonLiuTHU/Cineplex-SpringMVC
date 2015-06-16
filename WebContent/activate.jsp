@@ -8,6 +8,7 @@
 <title>Activate</title>
 </head>
 <body>
+
 	<form method="post" action="activate">
 		
 		<%-- <input type="hidden" name="phone"value=<%=phone%>> --%>
