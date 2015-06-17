@@ -4,9 +4,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 
-
-	
-
 	<!-- 配置 DispatcherServlet -->
 	<servlet>
 		<servlet-name>springDispatcherServlet</servlet-name>
@@ -36,6 +33,7 @@
         <url-pattern>*.gif</url-pattern>
         <url-pattern>*.jpg</url-pattern>
     </servlet-mapping>
+    
     <filter>  
     	<filter-name>CharacterEncodingFilter</filter-name>  
     	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
@@ -44,6 +42,7 @@
         	<param-value>utf-8</param-value>  
     	</init-param>  
 	</filter>  
+	
 	<filter-mapping>  
    		 <filter-name>CharacterEncodingFilter</filter-name>  
     	 <url-pattern>/*</url-pattern>  
@@ -58,9 +57,10 @@
   		<param-value>UTF-8</param-value>
   	</init-param>
   </filter>
+  
   <filter-mapping>
   	<filter-name>encodingFilter</filter-name>
-  	<url-pattern>/*</url-pattern>
+  	<url-pattern>*</url-pattern>
   </filter-mapping>
   
   <filter>  
@@ -73,7 +73,7 @@
 </filter>  
  <filter-mapping>  
   <filter-name>Set Character Encoding</filter-name>  
-  <url-pattern>/*</url-pattern>  
+  <url-pattern>*</url-pattern>  
  </filter-mapping>  
 
  <filter>
@@ -86,7 +86,7 @@
  </filter>
   <filter-mapping>
   <filter-name>Set Character Encoding</filter-name>
-  <url-pattern>/*</url-pattern>
+  <url-pattern>*</url-pattern>
   </filter-mapping>
   
   

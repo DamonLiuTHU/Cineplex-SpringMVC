@@ -19,6 +19,5 @@
 		</select> <input type="text" name="account" placeholder="Account number">
 		<input type="submit" class="mybutton">
 	</form>
-
 </body>
 </html>
