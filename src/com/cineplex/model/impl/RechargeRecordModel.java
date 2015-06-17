@@ -38,6 +38,9 @@ public class RechargeRecordModel {
 	
 	public static LinkedList<RechargeRecord> getRecharges(User u) {
 		// TODO Auto-generated method stub
+		if(u == null){
+			return new LinkedList<RechargeRecord>();
+		}
 		LinkedList<RechargeRecord> rechargelist = new LinkedList<RechargeRecord>();
 		String sql = "select * from rechargerecord where phone=?";
 		Connection con = DBTools.getConnection();

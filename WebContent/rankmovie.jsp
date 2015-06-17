@@ -75,7 +75,7 @@ window.onload = function(){
 <body>
 
 <div class="wrapper">
-<form action="" method="POST">
+<form action="SubmitRank" method="POST">
 	打分结果 
 	<span id="result"></span>  
 	<ul id="star">

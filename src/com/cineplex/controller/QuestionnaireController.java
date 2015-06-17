@@ -12,14 +12,6 @@ import com.cineplex.model.impl.DBTools;
 
 public class QuestionnaireController {
 	
-//	public static ArrayList<QuestionnaireForm> getQuestions(String movieId){
-//		ArrayList<QuestionnaireForm> formlist = new ArrayList<QuestionnaireForm>();
-//		
-//		
-//		
-//		
-//		return formlist;
-//	}
 	public static boolean isQuestionClosed(String qId){
 		String sql = "select state from questionnaireform where id=?";
 		Connection con = DBTools.getConnection();

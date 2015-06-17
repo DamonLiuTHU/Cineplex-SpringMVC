@@ -187,7 +187,7 @@ public class UserModel {
 
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, phone);
-			stmt.execute(sql);
+			stmt.execute();
 			ResultSet rs = stmt.getResultSet();
 			boolean is_VIP = rs.first();
 			con.close();
