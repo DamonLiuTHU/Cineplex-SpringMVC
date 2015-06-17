@@ -3,6 +3,19 @@ package com.cineplex.model.forms;
 public class UserRankForm {
 	private String score;
 	private String comment;
+	private String movieId;
+	public UserRankForm(String score, String comment, String movieId) {
+		super();
+		this.score = score;
+		this.comment = comment;
+		this.movieId = movieId;
+	}
+	public String getMovieId() {
+		return movieId;
+	}
+	public void setMovieId(String movieId) {
+		this.movieId = movieId;
+	}
 	public String getScore() {
 		return score;
 	}
@@ -25,7 +38,8 @@ public class UserRankForm {
 	}
 	@Override
 	public String toString() {
-		return "UserRankForm [score=" + score + ", comment=" + comment + "]";
+		return "UserRankForm [score=" + score + ", comment=" + comment
+				+ ", movieId=" + movieId + "]";
 	}
 	
 }

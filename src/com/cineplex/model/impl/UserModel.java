@@ -221,12 +221,13 @@ public class UserModel {
 	 * 如果过期日期 早于 当前天的日期，则返回true。
 	 */
 	private static boolean checkExpiration(String phone) {
-		String sql = "select expiration from user where phone=" + phone;
+		String sql = "select expiration from user where phone=?";
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Connection con = DBTools.getConnection();
 		try {
-			Statement stmt = con.createStatement();
-			stmt.execute(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, phone);
+			stmt.execute();
 			ResultSet rs = stmt.getResultSet();
 			while (rs.next()) {
 				String date_in_db = rs.getString(1);
@@ -569,6 +570,9 @@ public class UserModel {
 	}
 	
 	public static ArrayList<Movie> getMyMovies(String phone){
+		if(phone == null){
+			return new ArrayList<Movie>();
+		}
 		String sql = "select distinct movie.name,movie.id from movie,hall,orders where orders.phone=? and orders.periodID=hall.Id and hall.movieId=movie.Id";
 		Connection con = DBTools.getConnection();
 		ArrayList<Movie> result = new ArrayList<Movie>();

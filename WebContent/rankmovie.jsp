@@ -76,6 +76,9 @@ window.onload = function(){
 
 <div class="wrapper">
 <form action="SubmitRank" method="POST">
+
+	<input type="hidden" name="movieId" value=${movieId}>
+	
 	打分结果 
 	<span id="result"></span>  
 	<ul id="star">

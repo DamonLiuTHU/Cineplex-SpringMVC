@@ -110,13 +110,38 @@ th {
 		</tr>
 		
 
-		<c:forEach items="${movielist }" var="movie">
+		<c:forEach items="${movielist}" var="movie">
 			<tr>
 			
 				<td>${movie.name}</td>
 				<td><a href="getQuestion?movieId=${movie.id}" >查看活动</a></td>
 				
 				
+			</tr>
+		</c:forEach>
+
+
+
+	</table>
+	
+	<label>评论看过的电影：</label>
+	
+	<br/>
+	
+	
+	<table class="mytable">
+		<tr>
+			<th>电影名称</th>
+			
+			<th>去评论</th>
+			
+		</tr>
+		
+
+		<c:forEach items="${movielist}" var="mm">
+			<tr>
+				<td>${mm.name}</td>
+				<td><a href="goToRank?movieId=${mm.id}" >评论</a></td>
 			</tr>
 		</c:forEach>
 

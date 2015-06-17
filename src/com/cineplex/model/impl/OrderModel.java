@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.LinkedList;
 
 import com.cineplex.model.tables.Order;
+import com.cineplex.tools.DateFormatter;
 
 public class OrderModel {
 	
@@ -110,6 +111,7 @@ public class OrderModel {
 			ResultSet rs = ps.getResultSet();
 			while(rs.next()){
 				String date = rs.getString("date");
+				date = DateFormatter.formate(date);
 				String orderId = rs.getString("orderId");
 				String seatId=rs.getString("seatId");
 				String periodId=rs.getString("periodId");
