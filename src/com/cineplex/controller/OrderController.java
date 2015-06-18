@@ -43,7 +43,8 @@ public class OrderController {
 				OrderModel.makeOrder(phone, Id, seat);
 				
 			}
-			return "redirect:myaccount.jsp";
+			
+			return "redirect:myaccount";
 		}else{
 			return "redirect:balanceNotEnough.jsp";
 		}

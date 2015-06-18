@@ -94,6 +94,8 @@ window.onload = function(){
 	<textarea rows="10" cols="20" style="width: 326px; " name="comment"></textarea>
 	
 	<input type="submit">
+	
+	<p> ${note} </p>
 	</form>
 </div>  
 
