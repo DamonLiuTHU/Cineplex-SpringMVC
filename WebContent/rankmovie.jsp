@@ -75,28 +75,35 @@ window.onload = function(){
 <body>
 
 <div class="wrapper">
-<form action="SubmitRank" method="POST">
 
-	<input type="hidden" name="movieId" value=${movieId}>
+ <h1> ${note} </h1> 
+
+<% String note = (String)request.getAttribute("note");
+	if (note == null) { %>
+	<form action="SubmitRank" method="POST">
 	
-	打分结果 
-	<span id="result"></span>  
-	<ul id="star">
-	<li>★</li>
-	<li>★</li>
-	<li>★</li>
-	<li>★</li>
-	<li>★</li>
-	</ul>
-	<div id="star_word" >您的评分</div>
-	<input id="star_score" type= "hidden" name="score"  >
-	您的评论:
-	<textarea rows="10" cols="20" style="width: 326px; " name="comment"></textarea>
-	
-	<input type="submit">
-	
-	<p> ${note} </p>
+		<input type="hidden" name="movieId" value="${movieId}" />
+		
+		打分结果 
+		<span id="result"></span>  
+		<ul id="star">
+		<li>★</li>
+		<li>★</li>
+		<li>★</li>
+		<li>★</li>
+		<li>★</li>
+		</ul>
+		<div id="star_word" >您的评分</div>
+		<input id="star_score" type= "hidden" name="score"  >
+		您的评论:
+		<textarea rows="10" cols="20" style="width: 326px; " name="comment"></textarea>
+		
+		<input type="submit">
+		
+		
 	</form>
+<% } %>
+
 </div>  
 
 

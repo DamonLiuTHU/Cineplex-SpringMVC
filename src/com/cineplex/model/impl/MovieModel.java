@@ -154,13 +154,13 @@ public class MovieModel {
 	// MovieModel.getArrangements("1");
 	// }
 
-	public static int getLeftTickets(String id) {
+	public static int getLeftTickets(String movieId) {
 		Connection con = DBTools.getConnection();
 
 		try {
 			PreparedStatement stmt = con
 					.prepareStatement("select left_tickets from hall where Id=?");
-			stmt.setString(1, id);
+			stmt.setString(1, movieId);
 			stmt.execute();
 			ResultSet rs = stmt.getResultSet();
 			while(rs.next()){

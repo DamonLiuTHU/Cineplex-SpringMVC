@@ -4,6 +4,10 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+
+<%! String movieId ;%>
+<% movieId = (String)request.getParameter("movieId");  %>
+
 <!DOCTYPE HTML>
 <head>
 <title>Film Detail</title>
@@ -105,7 +109,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<h2>Wrath of the Titans </h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>					
 					<div class="price">
-						<p>Price: <span>$50</span></p>
+						<p>Price: <span>$<%= movieId %></span></p>
 					</div>
 					<div class="available">
 						<ul>

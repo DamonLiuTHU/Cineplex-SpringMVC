@@ -140,7 +140,7 @@
 
 
 					<div class="grid_1_of_5 images_1_of_5">
-						<a href="preview.jsp"><img src=<%=movie.getPoster() %> alt="" /></a>
+						<a href="preview.jsp?movieId=<%= movie.getId() %>"><img src=<%=movie.getPoster() %> alt="" /></a>
 						<h2>
 							<a href="preview.jsp"><%= movie.getName() %></a>
 						</h2>
@@ -160,12 +160,8 @@
 					</div>
 
 					<%
-					
   						 }
 					%>
-
-
-
 
 				</div>
 				<div class="content_bottom">
