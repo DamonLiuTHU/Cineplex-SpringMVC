@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+
+import com.cineplex.model.tables.Hall;
 import com.cineplex.model.tables.Statistics;
 import com.cineplex.model.tables.User;
 
@@ -74,9 +78,50 @@ public class StatisticsModel {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
 		return 0.0;
+	}
+	
+	
+	public static double getTotalUsageForSeat(int seatId)
+	{
+		double result = 0.0;
+		int seat_count = 0;
+		int seat_taken = 0;
+		String sql = "select count(*) as total from hall";
+		Connection con = DBTools.getConnection();
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+//			ps.setString(1,movieId);
+			ps.execute();
+			ResultSet rs = ps.getResultSet();
+			while(rs.next()){
+				seat_count = rs.getInt("total");
+			}
+			String sql_2 = "select count(*) as total from orders where seatId=?";
+			ps = con.prepareStatement(sql_2);
+			ps.setInt(1, seatId);
+			ps.execute();
+			rs = ps.getResultSet();
+			while(rs.next()){
+				seat_taken = rs.getInt("total");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if(seat_count != 0){
+			result = (double)(seat_taken) / (double)seat_count;
+		}
+		
+		return result;
 	}
 }

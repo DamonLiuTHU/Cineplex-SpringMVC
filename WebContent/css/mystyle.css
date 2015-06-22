@@ -43,6 +43,34 @@
 	height: 10px;
 }
 
+
+.myseat_small {
+	font-size: 1em;
+	margin-left: 1em;
+	margin-top: 1em;
+	padding: 8px 16px;
+	font-family: "ambleregular";
+	background: #FC7D01;
+	text-transform: uppercase;
+	color: #FFF;
+	border: none;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	-webkit-apperance: none;
+	width: 10px;
+	height: 8px;
+}
+
+.center_div{
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
 .tokenseat {
 	font-size: 1em;
 	margin-left: 1em;
@@ -73,4 +101,46 @@
 
 .username{
 	width:30%;
+}
+
+*{margin:0;padding:0;}
+body{font-size:14px;font-family:"Microsoft YaHei";}
+ul,li{list-style:none;}
+
+#tab{position:relative;}
+#tab .tabList ul li{
+	float:left;
+	background:#fefefe;
+	background:-moz-linear-gradient(top, #fefefe, #ededed);	
+	background:-o-linear-gradient(left top,left bottom, from(#fefefe), to(#ededed));
+	background:-webkit-gradient(linear,left top,left bottom, from(#fefefe), to(#ededed));
+	border:1px solid #ccc;
+	padding:5px 0;
+	width:25%;
+	text-align:center;
+	position:relative;
+	cursor:pointer;
+}
+#tab .tabCon{
+	position:absolute;
+	left:-1px;
+	top:32px;
+	border:1px solid #ccc;
+ 	border-top:none; 
+	width:75.5%;
+	height:450px;
+}
+#tab .tabCon > div{
+	padding:10px;
+	position:absolute; 
+	opacity:0;
+	filter:alpha(opacity=0);
+}
+#tab .tabList li.cur{
+	border-bottom:none;
+	background:#fff;
+}
+#tab .tabCon div.cur{
+	opacity:1;
+	filter:alpha(opacity=100);
 }

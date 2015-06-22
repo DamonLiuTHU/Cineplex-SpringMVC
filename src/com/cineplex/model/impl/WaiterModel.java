@@ -79,4 +79,11 @@ public class WaiterModel {
 		
 		return result;
 	}
+	
+	public double getWaiterPlanSuccessRate(String waiterId){
+		double result = 0.0;
+		
+		
+		return result;
+	}
 }

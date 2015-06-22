@@ -6,48 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>座位上座率统计</title>
 <style>
-*{margin:0;padding:0;}
-body{font-size:14px;font-family:"Microsoft YaHei";}
-ul,li{list-style:none;}
 
-#tab{position:relative;}
-#tab .tabList ul li{
-	float:left;
-	background:#fefefe;
-	background:-moz-linear-gradient(top, #fefefe, #ededed);	
-	background:-o-linear-gradient(left top,left bottom, from(#fefefe), to(#ededed));
-	background:-webkit-gradient(linear,left top,left bottom, from(#fefefe), to(#ededed));
-	border:1px solid #ccc;
-	padding:5px 0;
-	width:25%;
-	text-align:center;
-	position:relative;
-	cursor:pointer;
-}
-#tab .tabCon{
-	position:absolute;
-	left:-1px;
-	top:32px;
-	border:1px solid #ccc;
- 	border-top:none; 
-	width:75.5%;
-	height:450px;
-}
-#tab .tabCon div{
-	padding:10px;
-	position:absolute;
-	opacity:0;
-	filter:alpha(opacity=0);
-}
-#tab .tabList li.cur{
-	border-bottom:none;
-	background:#fff;
-}
-#tab .tabCon div.cur{
-	opacity:1;
-	filter:alpha(opacity=100);
-}
 </style>
+<link href="../css/mystyle.css" rel="stylesheet" type="text/css"
+	media="all" />
 </head>
 <body>
 <%@ include file="waiterheader.jsp" %>
@@ -55,46 +17,55 @@ ul,li{list-style:none;}
 <div id="tab" style="margin-left:1%;margin-top:20px;width:98%">
   <div class="tabList">
 	<ul>
-		<li class="cur">整体座位使用率</li>
-		<li>分厅座位使用率</li>
-		<li>分时段座位使用率</li>
+		<li id="tab_1" class="cur">整体座位使用率</li>
+		<li id="tab_2">分厅座位使用率</li>
+		<li id="tab_3">分时段座位使用率</li>
 	</ul>
   </div>
   <div class="tabCon">
-	<div class="cur">断桥残雪、千百度、幻听、想象之中</div>
-	<div>红尘客栈、牛仔很忙、给我一首歌的时间、听妈妈的话</div>
-	<div>被风吹过的夏天、江南、一千年以后</div>
+	<div class="cur" id="div_1"><%@ include file="totalseatusage.jsp" %></div>
+	<div id="div_2">红尘客栈、牛仔很忙、给我一首歌的时间、听妈妈的话</div>
+	<div id="div_3">被风吹过的夏天、江南、一千年以后</div>
   </div>
 </div>
 
 <script>
 window.onload = function() {
-    var oDiv = document.getElementById("tab");
-    var oLi = oDiv.getElementsByTagName("div")[0].getElementsByTagName("li");
-    var aCon = oDiv.getElementsByTagName("div")[1].getElementsByTagName("div");
     var timer = null;
-    for (var i = 0; i < oLi.length; i++) {
-        oLi[i].index = i;
-        oLi[i].onmouseover = function() {
+    
+    var content_div_1 = document.getElementById("div_1");
+    var content_div_2 = document.getElementById("div_2");
+    var content_div_3 = document.getElementById("div_3");
+    var content_array = new Array(content_div_1,content_div_2,content_div_3);
+    
+    var tab_1 = document.getElementById("tab_1");
+    var tab_2 = document.getElementById("tab_2");
+    var tab_3 = document.getElementById("tab_3");
+    var tab_array = new Array(tab_1,tab_2,tab_3);
+    
+    
+    for (var i = 0; i < tab_array.length; i++) {
+        tab_array[i].index = i; 
+        tab_array[i].onmouseover = function() {
             show(this.index);
-        }
+        };
     }
     function show(a) {
         index = a;
         var alpha = 0;
-        for (var j = 0; j < oLi.length; j++) {
-            oLi[j].className = "";
-            aCon[j].className = "";
-            aCon[j].style.opacity = 0;
-            aCon[j].style.filter = "alpha(opacity=0)";
+        for (var j = 0; j < tab_array.length; j++) {
+            tab_array[j].className = "";
+            content_array[j].className = "";
+            content_array[j].style.opacity = 0;
+            content_array[j].style.filter = "alpha(opacity=0)";
         }
-        oLi[index].className = "cur";
+        tab_array[index].className = "cur";
         clearInterval(timer);
         timer = setInterval(function() {
             alpha += 2;
             alpha > 100 && (alpha = 100);
-            aCon[index].style.opacity = alpha / 100;
-            aCon[index].style.filter = "alpha(opacity=" + alpha + ")";
+            content_array[index].style.opacity = alpha / 100;
+            content_array[index].style.filter = "alpha(opacity=" + alpha + ")";
             alpha == 100 && clearInterval(timer);
         },
         5)
