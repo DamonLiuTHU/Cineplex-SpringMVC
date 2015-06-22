@@ -13,10 +13,13 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import com.cineplex.model.tables.Comment;
 import com.cineplex.model.tables.Hall;
 import com.cineplex.model.tables.Movie;
+import com.cineplex.tools.NumberFormatter;
 
 public class MovieModel {
 	
@@ -255,5 +258,30 @@ public class MovieModel {
 		tx.commit();
 		session.close();
 		return m;
+	}
+	
+	public static long getRankCount(String movieId){
+		long result = -1;
+		Session session = ModelManager.sharedInstance().getSession();
+		Criteria c = session.createCriteria(Comment.class);
+		Criterion cr = Restrictions.eq("movieId",movieId);
+		c.add(cr);
+		c.setProjection(Projections.rowCount());
+		result =  (long) c.uniqueResult();
+		assert(result>=0);
+		return result;
+	}
+	
+	public static double getAvgScore(String movieId){
+		double result ;
+		Session session = ModelManager.sharedInstance().getSession();
+		Criteria c = session.createCriteria(Comment.class);
+		Criterion cr = Restrictions.eq("movieId",movieId);
+		c.add(cr);
+		c.setProjection(Projections.avg("score"));
+		result =  (double) c.uniqueResult();
+		assert(result>=0);
+		result = NumberFormatter.formate(result);
+		return result;
 	}
 }

@@ -17,6 +17,11 @@
 	margin: 0 auto;
 }
 
+.movie_detail_description{
+	border-bottom: 1px solid #E6E6E6;
+	padding-bottom: 2em;
+}
+
 .myseat {
 	font-size: 1em;
 	margin-left: 1em;

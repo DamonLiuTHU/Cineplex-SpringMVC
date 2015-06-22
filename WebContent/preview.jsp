@@ -1,31 +1,31 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<%@page import="com.cineplex.controller.UserController"%>
+<%@page import="com.cineplex.model.impl.CommentModel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ page import="com.cineplex.model.tables.Movie,com.cineplex.model.impl.MovieModel"
+<%@ page import="com.cineplex.model.tables.Movie,com.cineplex.model.impl.*,java.util.*,com.cineplex.model.tables.*"
  %>
 
 <%! String movieId ;
 	Movie movie;
+	List<Comment> commentlist;
 %>
 <% movieId = (String)request.getParameter("movieId");  
    movie = MovieModel.getMovie(movieId);
+   commentlist = CommentModel.getComments(movieId);
 %>
 
 <!DOCTYPE HTML>
 <head>
-<title>Film Detail</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="./css/style.css" rel="stylesheet" type="text/css" media="all"/>
-<script type="text/javascript" src="./js/jquery-1.9.0.min.js"></script> 
-<script type="text/javascript" src="./js/move-top.js"></script>
-<script type="text/javascript" src="./js/easing.js"></script>
+	<title>Film Detail</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="./css/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<link rel="stylesheet" href="./css/comment.css" media="all"/> 
+	<script type="text/javascript" src="./js/jquery-1.9.0.min.js"></script> 
+	<script type="text/javascript" src="./js/move-top.js"></script>
+	<script type="text/javascript" src="./js/easing.js">  </script>
+
 </head>
 <body>
 	<!-- <div class="header">
@@ -148,8 +148,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		  </div>
 		<div class="product_desc">	
 			 <h2>Details :</h2>
-			   <p><%=movie.getLong_description() %></p>
-	   </div>
+			   <p class="movie_detail_description"><%=movie.getLong_description() %></p>
+	    </div>
+	    
+	    <!-- average rank and rank count div  -->
+	    <div class="" data-target=""  style="display: block	">
+		    <div class="avg_score_tab">
+		        <div class="avg_score_tab_inner">
+		            <span>平均得分：</span>
+		            <strong><%=MovieModel.getAvgScore(movieId) %></strong>
+		            <span>分</span>
+		        </div>
+		        <div class="total_rank_times">共<strong><%=MovieModel.getRankCount(movieId) %></strong>次打分</div>
+		    	<div class="clear"></div>
+		    </div>
+		</div>
+		
+		<!-- the latest comments div -->
+		<div class="commentlist">
+			<h3>最新评论</h3>
+			
+			<% for(Comment commentItem : commentlist){%>
+				<div class="product_desc comment">
+					<span>评分：<%=commentItem.getScore() %></span>	<span class="comment_userId"> 用户：<%=commentItem.getUserId()%></span>
+					<p class="comment_inner"> <%=commentItem.getComment() %> </p>
+				</div>
+			<% } %>
+		</div>
    </div>
 				<div class="rightsidebar span_3_of_1 sidebar">
 					<h2>Specials</h2>

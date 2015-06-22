@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+
 import com.cineplex.model.tables.Movie;
 import com.cineplex.model.tables.User;
 
@@ -390,6 +395,14 @@ public class UserModel {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static User getUserById(String id){
+		Session s = ModelManager.sharedInstance().getSession();
+		Criteria criteria = s.createCriteria(User.class);
+		Criterion criterion = Restrictions.eq("id", id);
+		User u = (User) criteria.uniqueResult();
+		return u;
 	}
 	
 	public static User getUser(String phone){
