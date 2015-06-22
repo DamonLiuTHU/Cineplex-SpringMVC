@@ -8,13 +8,15 @@
 <title>服务员首页</title>
 </head>
 <body>
-	<a href="./makeplans.jsp"> 制定放映计划 </a>
-	<br/>
-	<a href="getPostQPage" >发布问题</a>
-	<br/>
-	<a href="getCloseQuestionPage" >结算问题</a>
-	<br/>
-	<a href="getSalePage" >售票</a>
-	
+<div class="categories" style="width: 30%">
+	<ul>
+	<h3>功能列表</h3>
+	<li><a href="./makeplans.jsp"> 制定放映计划 </a></li>
+	<li><a href="getPostQPage" >发布问题</a></li>
+	<li><a href="getCloseQuestionPage" >结算问题</a></li>
+	<li><a href="getSalePage" >售票</a>
+	<li><a href="getSeatUsageRate">查看座位使用率</a>
+	</ul>
+</div>
 </body>
 </html>
