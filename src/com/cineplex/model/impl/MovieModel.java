@@ -273,15 +273,18 @@ public class MovieModel {
 	}
 	
 	public static double getAvgScore(String movieId){
-		double result ;
+		double result = 0.0 ;
 		Session session = ModelManager.sharedInstance().getSession();
 		Criteria c = session.createCriteria(Comment.class);
 		Criterion cr = Restrictions.eq("movieId",movieId);
 		c.add(cr);
 		c.setProjection(Projections.avg("score"));
-		result =  (double) c.uniqueResult();
-		assert(result>=0);
-		result = NumberFormatter.formate(result);
+		Object result_obj = c.uniqueResult();
+		if(result_obj!=null){
+			result =  (double) result_obj;
+			assert(result>=0);
+			result = NumberFormatter.formate(result);
+		}
 		return result;
 	}
 }
