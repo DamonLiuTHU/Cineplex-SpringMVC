@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import com.cineplex.model.tables.Plan;
 public class HallModel {
 
-	public static int getPrice(String periodId) {
+	public static double getPrice(String periodId) {
 		
 		java.sql.Connection con = null;
 		String sql = "select movie.price from movie,hall where hall.Id=? and movie.id=hall.movieId";
@@ -21,8 +21,9 @@ public class HallModel {
 			ResultSet rs = ps.getResultSet();
 			while (rs.next()) {
 				String price = rs.getString(1);
-				int price_int = Integer.parseInt(price);
-				return price_int;
+//				int price_int = Integer.parseInt(price);
+				double price_double = Double.parseDouble(price);
+				return price_double;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

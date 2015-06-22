@@ -159,8 +159,8 @@ public class WaiterController {
 			@RequestParam("waiterId") String waiterId) {
 		String[] seats = seatlist.split(",");
 		int ticket_number = seats.length;
-		int price = HallModel.getPrice(Id);
-		int total = ticket_number * price;
+		double price = HallModel.getPrice(Id);
+		double total = ticket_number * price;
 		MovieModel.reduceTicket(Id, ticket_number);
 		for (String seat : seats) {
 			OrderModel.waiterMakeOrder(waiterId, Id, seat);

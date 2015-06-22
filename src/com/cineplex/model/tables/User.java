@@ -8,7 +8,7 @@ public class User {
 	private int VIP;
 	private Date expiration;
 	private int ID;
-	private int balance;
+	private double balance;
 	private int age;
 	private String gender;
 	private String city;
@@ -16,7 +16,7 @@ public class User {
 	
 	
 	public User(String phone, String password, int vIP, Date expiration,
-			int iD, int balance, int age, String gender, String city,
+			int iD, double balance, int age, String gender, String city,
 			String credit) {
 		super();
 		this.phone = phone;
@@ -72,10 +72,10 @@ public class User {
 	public void setID(int iD) {
 		ID = iD;
 	}
-	public int getBalance() {
+	public double getBalance() {
 		return balance;
 	}
-	public void setBalance(int balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 	public int getAge() {

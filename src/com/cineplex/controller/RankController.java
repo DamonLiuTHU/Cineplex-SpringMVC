@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cineplex.model.forms.UserRankForm;
 import com.cineplex.model.impl.CommentModel;
+import com.cineplex.model.impl.UserModel;
 import com.cineplex.model.tables.Comment;
 
 
@@ -22,10 +23,11 @@ public class RankController {
 	public ModelAndView submitRank(HttpServletRequest request,HttpSession session,UserRankForm form){
 		ModelAndView mav = new ModelAndView(rankMoviePage);
 		String email = (String) session.getAttribute("phone");
+		String userId = UserModel.getID(email);
 		if(form.getMovieId()=="" || form.getMovieId() == null){
 			
 		}else{
-			Comment comment = new Comment(form.getScore(), form.getComment(), form.getMovieId(), email);
+			Comment comment = new Comment(form.getScore(), form.getComment(), form.getMovieId(), userId);
 			CommentModel.save(comment);
 			String note = "评论上传成功！";
 			mav.addObject("note",note);

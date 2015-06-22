@@ -33,9 +33,9 @@ public class OrderController {
 	public String buyTicket(@RequestParam("seatlist") String seatlist,@RequestParam("Id") String Id,@RequestParam("phone") String phone){
 		String[] seats = seatlist.split(",");
 		int ticket_number = seats.length;
-		int price = HallModel.getPrice(Id);
-		int total  = ticket_number*price;
-		int user_balance = UserModel.getBalance(phone);
+		double price = HallModel.getPrice(Id);
+		double total  = ticket_number*price;
+		double user_balance = UserModel.getBalance(phone);
 		if(user_balance >= total){
 			MovieModel.reduceTicket(Id,ticket_number);
 			UserModel.reduceBalance(phone, total);

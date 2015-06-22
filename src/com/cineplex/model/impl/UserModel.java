@@ -280,7 +280,7 @@ public class UserModel {
 		}
 	}
 
-	public static int getBalance(String phone) {
+	public static double getBalance(String phone) {
 		// TODO Auto-generated method stub
 		String sql = "select balance from user where phone=?";
 		Connection con = DBTools.getConnection();
@@ -292,7 +292,7 @@ public class UserModel {
 			ResultSet rs = ps.getResultSet();
 			while (rs.next()) {
 				String balance = rs.getString(1);
-				int balance_int = Integer.parseInt(balance);
+				double balance_int = Double.parseDouble(balance);
 				return balance_int;
 			}
 		} catch (SQLException e) {
@@ -346,13 +346,13 @@ public class UserModel {
 	}
 	
 	public static void addBalance(String phone,int money){
-		int balance = getBalance(phone);
+		double balance = getBalance(phone);
 		balance += money;
 		String sql = "update user set balance=? where phone=?";
 		Connection con = DBTools.getConnection();
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, balance);
+			ps.setDouble(1, balance);
 			ps.setString(2, phone);
 			ps.execute();
 		} catch (SQLException e) {
@@ -368,14 +368,14 @@ public class UserModel {
 		}
 	}
 	
-	public static synchronized void reduceBalance(String phone,int money) {
-		int balance = getBalance(phone);
+	public static synchronized void reduceBalance(String phone,double money) {
+		double balance = getBalance(phone);
 		balance -= money;
 		String sql = "update user set balance=? where phone=?";
 		Connection con = DBTools.getConnection();
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, balance);
+			ps.setDouble(1, balance);
 			ps.setString(2, phone);
 			ps.execute();
 		} catch (SQLException e) {
@@ -408,7 +408,7 @@ public class UserModel {
 				String city = rs.getString("city");
 				int VIP = rs.getInt("VIP");
 				int ID = rs.getInt("ID");
-				int balance = rs.getInt("balance");
+				double balance = rs.getDouble("balance");
 				int age = rs.getInt("age");
 				java.sql.Date expiration  = (java.sql.Date) rs.getObject("expiration");
 				User u = new User(phone, password, VIP, expiration, ID, balance, age, gender, city,credit);

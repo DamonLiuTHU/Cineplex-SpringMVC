@@ -130,9 +130,9 @@ public class UserController {
 		return UserModel.getExpirationDate(phone);
 	}
 
-	public static int getBalance(String phone) {
+	public static double getBalance(String phone) {
 
-		int result = 0;
+		double result = 0;
 		result = UserModel.getBalance(phone);
 		return result;
 	}

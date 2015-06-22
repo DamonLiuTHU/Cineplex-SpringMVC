@@ -9,34 +9,30 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-
-
-
+import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 import com.cineplex.model.tables.Hall;
 import com.cineplex.model.tables.Movie;
 
 public class MovieModel {
 	
-	static Configuration config = new Configuration().configure();;
-	static ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(config.getProperties()).buildServiceRegistry();
-	
-	static SessionFactory sessionFactory = config.buildSessionFactory(serviceRegistry);
+//	static Configuration config = new Configuration().configure();;
+//	static ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(config.getProperties()).buildServiceRegistry();
+//	
+//	static SessionFactory sessionFactory = config.buildSessionFactory(serviceRegistry);
 	
 	
 	
 	public MovieModel() {
 		super();
 		// TODO Auto-generated constructor stub
-		config = new Configuration().configure();
-		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(config.getProperties()).buildServiceRegistry();
-		sessionFactory = config.buildSessionFactory(serviceRegistry);
+//		config = new Configuration().configure();
+//		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(config.getProperties()).buildServiceRegistry();
+//		sessionFactory = config.buildSessionFactory(serviceRegistry);
 	}
 	
 	
@@ -153,14 +149,44 @@ public class MovieModel {
 	// public static void main(String args[]){
 	// MovieModel.getArrangements("1");
 	// }
+	
+	public static int getLeftTicketsForMovie(String movieId){
+		Connection con = DBTools.getConnection();
 
-	public static int getLeftTickets(String movieId) {
+		try {
+			PreparedStatement stmt = con
+					.prepareStatement("select sum(left_tickets) from hall where movieId=?");
+			stmt.setString(1, movieId);
+			stmt.execute();
+			ResultSet rs = stmt.getResultSet();
+			while(rs.next()){
+				int result = rs.getInt(1);
+				con.close();
+				return result;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return 0;
+	}
+
+	public static int getLeftTicketsForHall(String hallId) {
 		Connection con = DBTools.getConnection();
 
 		try {
 			PreparedStatement stmt = con
 					.prepareStatement("select left_tickets from hall where Id=?");
-			stmt.setString(1, movieId);
+			stmt.setString(1, hallId);
 			stmt.execute();
 			ResultSet rs = stmt.getResultSet();
 			while(rs.next()){
@@ -187,7 +213,7 @@ public class MovieModel {
 	public static synchronized void reduceTicket(String id, int ticket_number) {
 		// TODO Auto-generated method stub
 		Connection con = DBTools.getConnection();
-		int left_tickets = getLeftTickets(id);
+		int left_tickets = getLeftTicketsForHall(id);
 		try {
 			PreparedStatement stmt = con
 					.prepareStatement("update hall set left_tickets=? where Id=?");
@@ -211,10 +237,23 @@ public class MovieModel {
 
 	public static void save(Movie m) {
 		// TODO Auto-generated method stub
-		Session session = sessionFactory.openSession();
+		Session session = ModelManager.sharedInstance().getSession();
 		Transaction tx = session.beginTransaction();
 		session.save(m);
 		tx.commit();
 		session.close();
+	}
+	
+	public static Movie getMovie(String movieId){
+		Movie m = null;
+		Session session = ModelManager.sharedInstance().getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(Movie.class);
+		Criterion cr = Restrictions.eq("id", movieId);
+		c.add(cr);
+		m = (Movie) c.uniqueResult();
+		tx.commit();
+		session.close();
+		return m;
 	}
 }

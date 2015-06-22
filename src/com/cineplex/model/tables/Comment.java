@@ -11,10 +11,16 @@ public class Comment {
 	private String score;
 	private String comment;
 	private String movieId;
-	private String email;
+	private String userId;
 	
 	
 	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public Comment(int id, String score, String comment, String movieId,
 			String email) {
 		super();
@@ -22,7 +28,7 @@ public class Comment {
 		this.score = score;
 		this.comment = comment;
 		this.movieId = movieId;
-		this.email = email;
+		this.userId = email;
 	}
 	public int getId() {
 		return Id;
@@ -48,23 +54,23 @@ public class Comment {
 	public void setMovieId(String movieId) {
 		this.movieId = movieId;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+//	public String getEmail() {
+//		return userId;
+//	}
+//	public void setEmail(String email) {
+//		this.userId = email;
+//	}
 	@Override
 	public String toString() {
 		return "Comment [Id=" + Id + ", score=" + score + ", comment="
-				+ comment + ", movieId=" + movieId + ", email=" + email + "]";
+				+ comment + ", movieId=" + movieId + ", email=" + userId + "]";
 	}
 	public Comment(String score, String comment, String movieId, String email) {
 		super();
 		this.score = score;
 		this.comment = comment;
 		this.movieId = movieId;
-		this.email = email;
+		this.userId = email;
 	}
 	public Comment() {
 		super();

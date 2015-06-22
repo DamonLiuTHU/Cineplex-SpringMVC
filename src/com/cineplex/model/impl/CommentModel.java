@@ -11,6 +11,7 @@ public class CommentModel {
 		if(comment.getMovieId() == null){
 			return;
 		}
+		
 		Session session = ModelManager.sharedInstance().getSession();
 		Transaction tx = session.beginTransaction();
 		session.save(comment);

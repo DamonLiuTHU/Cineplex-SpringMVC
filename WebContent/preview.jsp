@@ -4,9 +4,18 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
-<%! String movieId ;%>
-<% movieId = (String)request.getParameter("movieId");  %>
+<%@ page import="com.cineplex.model.tables.Movie,com.cineplex.model.impl.MovieModel"
+ %>
+
+<%! String movieId ;
+	Movie movie;
+%>
+<% movieId = (String)request.getParameter("movieId");  
+   movie = MovieModel.getMovie(movieId);
+%>
 
 <!DOCTYPE HTML>
 <head>
@@ -19,7 +28,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script type="text/javascript" src="./js/easing.js"></script>
 </head>
 <body>
-	<div class="header">
+	<!-- <div class="header">
 		 <div class="headertop_desc">
 			<div class="wrap">
 				<div class="nav_list">
@@ -90,7 +99,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			   <div class="clear"></div>
   		    </div>     				
    		</div>
-   </div>
+   </div> -->
+   
+   <%@ include file="header.jsp" %>
+   
    <div class="main">
    	 <div class="wrap">
    	 	<div class="content_top">
@@ -103,26 +115,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="cont-desc span_1_of_2">
 				  <div class="product-details">				
 					<div class="grid images_3_of_2">
-						<img src="./images/preview.jpg" alt="" />
+						<img src=<%=movie.getPoster()%> alt="movie picture here" />
 				  </div>
 				<div class="desc span_3_of_2">
-					<h2>Wrath of the Titans </h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>					
+					<h2><%=movie.getName() %></h2>
+					<p><%=movie.getShort_description() %></p>					
 					<div class="price">
-						<p>Price: <span>$<%= movieId %></span></p>
+						<p>Price: <span>$<%= movie.getPrice() %></span></p>
 					</div>
 					<div class="available">
 						<ul>
-						  <li><span>Model:</span> &nbsp; Model 1</li>
+						  <li><span>Model:</span> &nbsp;<%=movie.getType() %></li>
 						  <li><span>Shipping Weight:</span>&nbsp; 5lbs</li>
-						  <li><span>Units in Stock:</span>&nbsp; 566</li>
+						  <li><span>Units in Stock:</span>&nbsp;<%=MovieModel.getLeftTicketsForMovie(movieId)%></li>
 					    </ul>
 					</div>
 				<div class="share-desc">
 					<div class="share">
-						<p>Number of units :</p><input class="text_box" type="text">				
+						<!-- <p>Number of units :</p><input class="text_box" type="text"> -->				
 					</div>
-					<div class="button"><span><a href="#">But Ticket</a></span></div>					
+					<div class="button"><span><a href="order?movieId=<%= movie.getId()%>">But Ticket</a></span></div>					
 					<div class="clear"></div>
 				</div>
 				 <div class="wish-list">
@@ -136,8 +148,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		  </div>
 		<div class="product_desc">	
 			 <h2>Details :</h2>
-			   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-	           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+			   <p><%=movie.getLong_description() %></p>
 	   </div>
    </div>
 				<div class="rightsidebar span_3_of_1 sidebar">
@@ -201,69 +212,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
  		 		 </div>
    	 		</div>
         </div>
-   <div class="footer">
-   	  <div class="wrap">	
-	     <div class="section group">
-				<div class="col_1_of_4 span_1_of_4">
-						<h4>Information</h4>
-						<ul>
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Customer Service</a></li>
-						<li><a href="#">Advanced Search</a></li>
-						<li><a href="#">Orders and Returns</a></li>
-						<li><a href="contact.html">Contact Us</a></li>
-						</ul>
-					</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<h4>Why buy from us</h4>
-						<ul>
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Customer Service</a></li>
-						<li><a href="#">Privacy Policy</a></li>
-						<li><a href="contact.html">Site Map</a></li>
-						<li><a href="#">Search Terms</a></li>
-						</ul>
-				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<h4>My account</h4>
-						<ul>
-							<li><a href="contact.html">Sign In</a></li>
-							<li><a href="index.html">View Cart</a></li>
-							<li><a href="#">My Wishlist</a></li>
-							<li><a href="#">Track My Order</a></li>
-							<li><a href="contact.html">Help</a></li>
-						</ul>
-				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<h4>Contact</h4>
-						<ul>
-							<li><span>+91-123-456789</span></li>
-							<li><span>+00-123-000000</span></li>
-						</ul>
-						<div class="social-icons">
-							<h4>Follow Us</h4>
-					   		  <ul>
-							      <li><a href="#" target="_blank"><img src="./images/facebook.png" alt="" /></a></li>
-							      <li><a href="#" target="_blank"><img src="./images/twitter.png" alt="" /></a></li>
-							      <li><a href="#" target="_blank"><img src="./images/skype.png" alt="" /> </a></li>
-							      <li><a href="#" target="_blank"> <img src="./images/linkedin.png" alt="" /></a></li>
-							      <div class="clear"></div>
-						     </ul>
-   	 					</div>
-				</div>
-			</div>
-			 <div class="copy_right">
-				<p>Company Name © All rights Reseverd | Design by  <a href="http://w3layouts.com">W3Layouts</a> </p>
-		   </div>			
-        </div>
-    </div>
-   <script type="text/javascript">
-		$(document).ready(function() {			
-			$().UItoTop({ easingType: 'easeOutQuart' });
-			
-		});
-	</script>
-    <a href="#" id="toTop"><span id="toTopHover"> </span></a>
+<%@ include file="footer.jsp" %>
+   
 </body>
 </html>
 
