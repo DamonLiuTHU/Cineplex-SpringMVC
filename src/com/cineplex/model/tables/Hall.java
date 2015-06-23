@@ -3,7 +3,7 @@ package com.cineplex.model.tables;
 public class Hall {
 	
 	
-	private String ordernumber;   //在数据库中代表该电影在Hall表中，在哪个时间段被放映。
+	private String Id;   //在数据库中代表该电影在Hall表中，在哪个时间段被放映。
 	private String movieId;  
 	private String start;  //开始时间
 	private String end;  //结束时间
@@ -12,11 +12,17 @@ public class Hall {
 	
 	
 	
+	public String getId() {
+		return Id;
+	}
+	public void setId(String id) {
+		Id = id;
+	}
 	public String getOrdernumber() {
-		return ordernumber;
+		return Id;
 	}
 	public void setOrdernumber(String ordernumber) {
-		this.ordernumber = ordernumber;
+		this.Id = ordernumber;
 	}
 	public String getMovieId() {
 		return movieId;
@@ -50,14 +56,14 @@ public class Hall {
 	}
 	@Override
 	public String toString() {
-		return "Hall [ordernumber=" + ordernumber + ", movieId=" + movieId
-				+ ", start=" + start + ", end=" + end + ", hallId=" + hallId
-				+ ", left_tickets=" + left_tickets + "]";
+		return "Hall [Id=" + Id + ", movieId=" + movieId + ", start=" + start
+				+ ", end=" + end + ", hallId=" + hallId + ", left_tickets="
+				+ left_tickets + "]";
 	}
 	public Hall(String ordernumber, String movieId, String start, String end,
 			String hallId, String left_tickets) {
 		super();
-		this.ordernumber = ordernumber;
+		this.Id = ordernumber;
 		this.movieId = movieId;
 		this.start = start;
 		this.end = end;

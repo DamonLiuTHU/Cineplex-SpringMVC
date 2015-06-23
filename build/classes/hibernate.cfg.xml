@@ -20,6 +20,7 @@
 <mapping class="com.cineplex.model.forms.QuestionnaireForm"/>
 <mapping class="com.cineplex.model.forms.AnswerForm"/>
 <mapping class="com.cineplex.model.tables.Movie"/>
+<mapping class="com.cineplex.model.tables.Hall"/>
 
   </session-factory>
 </hibernate-configuration>

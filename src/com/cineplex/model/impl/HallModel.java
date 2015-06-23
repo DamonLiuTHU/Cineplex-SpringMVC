@@ -5,12 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+
+import com.cineplex.model.tables.Hall;
 import com.cineplex.model.tables.Plan;
+
 public class HallModel {
 
 	public static double getPrice(String periodId) {
-		
+
 		java.sql.Connection con = null;
 		String sql = "select movie.price from movie,hall where hall.Id=? and movie.id=hall.movieId";
 		try {
@@ -21,14 +27,14 @@ public class HallModel {
 			ResultSet rs = ps.getResultSet();
 			while (rs.next()) {
 				String price = rs.getString(1);
-//				int price_int = Integer.parseInt(price);
+				// int price_int = Integer.parseInt(price);
 				double price_double = Double.parseDouble(price);
 				return price_double;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally{
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
@@ -44,14 +50,13 @@ public class HallModel {
 		String sql = "delete from hall where hallId=?";
 		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = con
-					.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, hallId);
 			ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally{
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
@@ -85,8 +90,7 @@ public class HallModel {
 																					// 为默认值51。
 		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = con
-					.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, p.getMovieId());
 			ps.setObject(2, p.getStart());
 			ps.setObject(3, p.getEnd());
@@ -95,8 +99,7 @@ public class HallModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		finally{
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
@@ -114,11 +117,10 @@ public class HallModel {
 												// 为默认值51。
 		Connection con = DBTools.getConnection();
 		try {
-			PreparedStatement ps = con
-					.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.execute();
 			ResultSet rs = ps.getResultSet();
-			while(rs.next()){
+			while (rs.next()) {
 				Integer hallId = rs.getInt("hallId");
 				halllist.add(hallId);
 			}
@@ -126,7 +128,7 @@ public class HallModel {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
@@ -135,5 +137,41 @@ public class HallModel {
 			}
 		}
 		return null;
+	}
+
+	public static List<Hall> getHalls() {
+		List<Hall> result = new ArrayList<>();
+
+		String sql = "select * from hall"; // Id
+		// 自增属性，不用管。
+		// left_tickets
+		// 为默认值51。
+		Connection con = DBTools.getConnection();
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.execute();
+			ResultSet rs = ps.getResultSet();
+			while (rs.next()) {
+				String movieId = rs.getString("movieId");
+				String start = rs.getString("start");
+				String end = rs.getString("end");
+				String hallId = rs.getString("hallId");
+				String Id = rs.getString("Id");
+				String left_tickets = rs.getString("left_tickets");
+				Hall h = new Hall(Id, movieId, start, end, hallId, left_tickets);
+				result.add(h);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 }

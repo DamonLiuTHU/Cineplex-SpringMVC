@@ -168,6 +168,14 @@ public class WaiterController {
 		return "redirect:waiterindex.jsp";
 	}
 	
+	@RequestMapping("getPeriodSeatUsage")
+	public ModelAndView getPeriodSeatUsage() {
+		ModelAndView mav = new ModelAndView("waiter/periodSeatUsage");
+		
+		
+		
+		return mav;
+	}
 	
 	
 }

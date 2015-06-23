@@ -75,11 +75,8 @@ th {
 			<th></th>
 		</tr>
 		<%
-		
 			LinkedList<Order> myorders = OrderController.getOrders(phone);
-				
 		%>
-
 		<c:forEach items="<%=myorders %>" var="order">
 			<tr>
 				<td>${order.date }  </td>
@@ -90,16 +87,10 @@ th {
 				<td><c:out value="${order.seatId}" /></td>
 			</tr>
 		</c:forEach>
-
-
-
 	</table>
 	
-	
 	<label>查看我看过的电影的活动：</label>
-	
 	<br/>
-	
 	
 	<table class="mytable">
 		<tr>

@@ -15,6 +15,7 @@
 	<li><a href="getPostQPage" >发布问题</a></li>
 	<li><a href="getCloseQuestionPage" >结算问题</a></li>
 	<li><a href="getSalePage" >售票</a>
+	<li><a href="getPeriodSeatUsage">查看不同时段上座率统计</a>
 	</ul>
 </div>
 </body>

@@ -1,15 +1,16 @@
 <%@page import="com.cineplex.tools.NumberFormatter"%>
+<%@page import="java.util.List"%>
+<%@page import="com.cineplex.model.tables.Hall"%>
+<%@page import="com.cineplex.model.impl.HallModel"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.cineplex.model.impl.WaiterModel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="mheader.jsp" %>
+<%@ include file="waiterheader.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>计划成功率一览</title>
+<title>不同时段上座率统计</title>
 <style>
 td, tr, th {
 	border-bottom: 1px solid #AEDEF2;
@@ -26,25 +27,25 @@ th {
 <body>
 	<table class="mytable"  >
 		<tr>
-			<th>服务员编号</th>
-			<th>计划通过率</th>
+			<th>时段</th>
+			<th>上座率</th>
 		</tr>
 		<%
-			ArrayList<String> waiters = WaiterModel.getAllWaiters();
+			List<Hall> halls = HallModel.getHalls();
 		%>
 		<%
-			for(String waiterId : waiters){
+			for(Hall h : halls){
 		%>
 			<tr>
-				<td><%=waiterId %>  </td>
-				<td><%=NumberFormatter.percentage(WaiterModel.getWaiterPlanSuccessRate(waiterId)) %></td>
+				<td><%=h.getStart()+"-"+h.getEnd() %>  </td>
+				<td><% Integer left = Integer.parseInt(h.getLeft_tickets());
+					   double rate = left.doubleValue()/51D;
+					   rate = 1-rate;
+					   out.print(NumberFormatter.percentage(rate));%></td>
 			</tr>
 		<%
 			}
 		%>
-	
-	
-	
 	</table>
 </body>
 </html>

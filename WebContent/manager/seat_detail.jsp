@@ -24,8 +24,8 @@
   </div>
   <div class="tabCon">
 	<div class="cur" id="div_1"><%@ include file="totalseatusage.jsp" %></div>
-	<div id="div_2">红尘客栈、牛仔很忙、给我一首歌的时间、听妈妈的话</div>
-	<div id="div_3">被风吹过的夏天、江南、一千年以后</div>
+	<div id="div_2">developing </div>
+	<div id="div_3">developing </div>
   </div>
 </div>
 

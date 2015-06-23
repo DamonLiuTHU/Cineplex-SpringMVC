@@ -7,11 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-
 import com.cineplex.model.forms.QuestionnaireForm;
-import com.cineplex.model.tables.Plan;
 
 public class WaiterModel {
 	
@@ -133,6 +129,37 @@ public class WaiterModel {
 			result = (double)accepted/(double)total;
 		}
 		
+		return result;
+	}
+	
+	public static ArrayList<String> getAllWaiters(){
+		ArrayList<String> result = new ArrayList<String>();
+		Connection con = DBTools.getConnection();
+		String id = null;
+		try {
+			String sql = "select waiterId from waiter";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.execute();
+			ResultSet rs = ps.getResultSet();
+			while(rs.next()){
+				id = rs.getString("waiterId");
+				result.add(id);
+			}
+			rs.close();
+			ps.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return result;
 	}
 }
