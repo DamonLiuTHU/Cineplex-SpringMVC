@@ -39,7 +39,6 @@ public class WaiterModel {
 		return false;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static ArrayList<QuestionnaireForm> getMyQuestions(String waiterId){
 		ArrayList<QuestionnaireForm> result = new ArrayList<QuestionnaireForm>();
 		String sql = "select * from questionnaireform where waiterId=? and state='on'";

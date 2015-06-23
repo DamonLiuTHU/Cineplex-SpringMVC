@@ -401,6 +401,7 @@ public class UserModel {
 		Session s = ModelManager.sharedInstance().getSession();
 		Criteria criteria = s.createCriteria(User.class);
 		Criterion criterion = Restrictions.eq("id", id);
+		criteria.add(criterion);
 		User u = (User) criteria.uniqueResult();
 		return u;
 	}

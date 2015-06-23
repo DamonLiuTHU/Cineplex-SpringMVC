@@ -1,7 +1,6 @@
 package com.cineplex.model.impl;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.naming.Context;

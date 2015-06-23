@@ -5,11 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-
-import com.cineplex.model.tables.Hall;
 import com.cineplex.model.tables.Statistics;
 import com.cineplex.model.tables.User;
 

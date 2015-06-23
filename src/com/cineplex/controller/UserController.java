@@ -7,7 +7,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,15 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cineplex.model.forms.ActivateForm;
 import com.cineplex.model.forms.AnswerForm;
-import com.cineplex.model.forms.LoginForm;
 import com.cineplex.model.forms.PayForm;
 import com.cineplex.model.forms.QuestionnaireForm;
-import com.cineplex.model.forms.RegisterForm;
 import com.cineplex.model.impl.AnswerModel;
 import com.cineplex.model.impl.BankModel;
-import com.cineplex.model.impl.LoginModel;
 import com.cineplex.model.impl.QuestionnaireModel;
-import com.cineplex.model.impl.RegisterModel;
 import com.cineplex.model.impl.UserModel;
 import com.cineplex.model.tables.Movie;
 import com.cineplex.model.tables.Order;

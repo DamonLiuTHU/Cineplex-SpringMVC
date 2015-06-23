@@ -25,6 +25,7 @@ public class CommentModel {
 		session.close();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static List<Comment> getComments(String movieId){
 		List<Comment> result = new ArrayList<Comment>();
 		Session  s = ModelManager.sharedInstance().getSession();

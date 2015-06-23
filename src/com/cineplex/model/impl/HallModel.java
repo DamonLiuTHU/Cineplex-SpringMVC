@@ -6,10 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
 import com.cineplex.model.tables.Hall;
 import com.cineplex.model.tables.Plan;
 

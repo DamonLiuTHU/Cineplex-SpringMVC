@@ -15,12 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cineplex.model.forms.LoginForm;
 import com.cineplex.model.forms.PlanForm;
 import com.cineplex.model.forms.QuestionnaireForm;
-import com.cineplex.model.impl.HallModel;
+//import com.cineplex.model.impl.HallModel;
 import com.cineplex.model.impl.MovieModel;
 import com.cineplex.model.impl.OrderModel;
 import com.cineplex.model.impl.PlanModel;
 import com.cineplex.model.impl.QuestionnaireModel;
-import com.cineplex.model.impl.UserModel;
 import com.cineplex.model.impl.WaiterModel;
 import com.cineplex.model.tables.Hall;
 import com.cineplex.model.tables.Movie;
@@ -137,7 +136,7 @@ public class WaiterController {
 
 	@RequestMapping("getSalePage")
 	public ModelAndView getSalePage(HttpSession session) {
-		String waiterId = (String) session.getAttribute("waiterId");
+//		String waiterId = (String) session.getAttribute("waiterId");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/waiter/sellticket");
 		return mav;
@@ -159,8 +158,8 @@ public class WaiterController {
 			@RequestParam("waiterId") String waiterId) {
 		String[] seats = seatlist.split(",");
 		int ticket_number = seats.length;
-		double price = HallModel.getPrice(Id);
-		double total = ticket_number * price;
+//		double price = HallModel.getPrice(Id);
+//		double total = ticket_number * price;
 		MovieModel.reduceTicket(Id, ticket_number);
 		for (String seat : seats) {
 			OrderModel.waiterMakeOrder(waiterId, Id, seat);

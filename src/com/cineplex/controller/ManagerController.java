@@ -1,7 +1,6 @@
 package com.cineplex.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,9 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cineplex.model.forms.LoginForm;
@@ -32,6 +28,8 @@ import com.cineplex.model.tables.Statistics;
 @Controller
 public class ManagerController{
 	
+	private static File file;
+
 	@RequestMapping("mlogin.do")
 	public String getLoginPage(){
 		return "manager/mlogin";
@@ -150,15 +148,11 @@ public class ManagerController{
 		m.setPublish_date(sdf.format(today));
 		mav.setViewName("manager/mindex");
 		System.out.println(m);
-		//转型为MultipartHttpRequest(重点的所在)  
-//		MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;  
-        //  获得第1张图片（根据前台的name名称得到上传的文件）   
-//        MultipartFile poster  =  ((MultipartRequest) request).getFile("poster");  
-        File file = null;  
+		setFile(null);  
         String path="C:\\快盘\\大三中\\《J2EE与中间件》\\workspace\\Cineplex-SpringMVC\\WebContent\\images";
         path=request.getContextPath();
         m.setPoster("./images/"+m.getPoster());
-        file = createFolder(path);
+        setFile(createFolder(path));
 //        try {
 ////			poster.transferTo(file);
 //		} catch (IllegalStateException | IOException e) {
@@ -216,5 +210,15 @@ public class ManagerController{
 		double[] data = HallModel.getHallFinancialCondition();
 		mav.addObject("data",data);
 		return mav;
+	}
+
+
+	public static File getFile() {
+		return file;
+	}
+
+
+	public static void setFile(File file) {
+		ManagerController.file = file;
 	}
 }

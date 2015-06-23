@@ -44,7 +44,7 @@ public class RegisterModel {
 			String md5 = MD5.getMD5(pw.getBytes());
 			pst.setString(2, md5);
 			pst.setString(3, code+"");
-			boolean success = pst.execute();
+			pst.execute();
 //			if(success){
 				System.out.println("Sending Activate Code ==========================");
 				MailSender sender = MailFactory.getSender(MailSenderType.SERVICE);
