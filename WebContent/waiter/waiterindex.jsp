@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>服务员首页</title>
+<title>服务员主页</title>
 </head>
 <body>
 <div class="categories" style="width: 30%">
@@ -15,7 +15,6 @@
 	<li><a href="getPostQPage" >发布问题</a></li>
 	<li><a href="getCloseQuestionPage" >结算问题</a></li>
 	<li><a href="getSalePage" >售票</a>
-	<li><a href="getSeatUsageRate">查看座位使用率</a>
 	</ul>
 </div>
 </body>

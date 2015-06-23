@@ -169,12 +169,5 @@ public class WaiterController {
 	}
 	
 	
-	//通过对座位不同位置的统计来为经理制定优惠政策提供决策支持。
-	@RequestMapping("/getSeatUsageRate")
-	public ModelAndView getSeatUsageRatePage(){
-		ModelAndView mav = new ModelAndView("waiter/seat_detail");
-		
-		
-		return mav;
-	}
+	
 }

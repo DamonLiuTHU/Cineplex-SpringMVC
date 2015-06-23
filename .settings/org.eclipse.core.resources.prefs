@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//WebContent/index.jsp=UTF-8
+encoding//WebContent/manager/totalseatusage.jsp=UTF-8
+encoding//WebContent/manager/waiterPlanSuccessRate.jsp=UTF-8
 encoding//WebContent/personalinfo.jsp=UTF-8
 encoding//WebContent/success.jsp=UTF-8
-encoding//WebContent/waiter/totalseatusage.jsp=UTF-8
 encoding/<project>=UTF-8

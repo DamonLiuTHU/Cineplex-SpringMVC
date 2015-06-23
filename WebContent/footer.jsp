@@ -15,7 +15,7 @@
 						<ul>
 						<li><a href="#">About Us</a></li>
 						<li><a href="#">Customer Service</a></li>
-						<li><a href="#">Advanced Search</a></li>
+						<li><a href="./manager/mlogin.do">Manager Port</a></li>
 						<li><a href="./waiter/login">Waiter Port</a></li>
 						<li><a href="contact.html">Contact Us</a></li>
 						</ul>

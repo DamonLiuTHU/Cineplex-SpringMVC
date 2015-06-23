@@ -9,11 +9,13 @@
 <title>经理主页</title>
 </head>
 <body>
-	<a href="getCheckPlansPage"  ><u>查看服务员上传计划</u></a>
-	<br/>
-	<a href="getStatistics"  ><u>查看逐月统计状况</u></a>
-	<br/>
-	<a href="getPublishPage"> 发布电影</a>
-	
+<div class="categories" style="width: 30%">
+	<h3>功能列表</h3>
+	<li><a href="getCheckPlansPage"  >查看服务员上传计划</a></li>
+	<li><a href="getStatistics"  >查看逐月统计状况</a></li>
+	<li><a href="getPublishPage"> 发布电影</a></li>
+	<li><a href="getSeatUsageRate">查看座位使用率</a>
+	<li><a href="getWaiterPlanSuccessRate">查看服务员计划成功率</a></li>
+</div>
 </body>
 </html>

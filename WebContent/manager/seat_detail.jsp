@@ -12,7 +12,7 @@
 	media="all" />
 </head>
 <body>
-<%@ include file="waiterheader.jsp" %>
+<%@ include file="mheader.jsp" %>
 <!-- 代码 begin -->
 <div id="tab" style="margin-left:1%;margin-top:20px;width:98%">
   <div class="tabList">

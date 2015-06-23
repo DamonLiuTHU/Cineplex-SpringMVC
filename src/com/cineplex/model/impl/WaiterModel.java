@@ -6,9 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 
 import com.cineplex.model.forms.QuestionnaireForm;
+import com.cineplex.model.tables.Plan;
 
 public class WaiterModel {
 	
@@ -80,9 +83,55 @@ public class WaiterModel {
 		return result;
 	}
 	
-	public double getWaiterPlanSuccessRate(String waiterId){
+	
+	/*
+	 * 统计一个服务员的计划通过率。即：通过的计划/他提交的所有计划
+	 */
+	public static double getWaiterPlanSuccessRate(String waiterId){
 		double result = 0.0;
+		int total = 0;
+		int accepted = 0;
+//		Session session = ModelManager.sharedInstance().getSession();
+//		Criteria criteria = session.createCriteria(Plan.class);
+		Connection con = DBTools.getConnection();
+		try {
+			String sql = "select count(*) as total from plans where waiterId=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, waiterId);
+			ps.execute();
+			ResultSet rs = ps.getResultSet();
+			while(rs.next()){
+				total = rs.getInt("total");
+			}
+			
+			sql = "select count(*) as total from plans where waiterId=? and state='ACCEPT'";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, waiterId);
+			ps.execute();
+			rs = ps.getResultSet();
+			while(rs.next()){
+				accepted = rs.getInt("total");
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
+		if(total!=0){
+			result = (double)accepted/(double)total;
+		}
 		
 		return result;
 	}

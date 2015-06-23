@@ -48,7 +48,7 @@
 	font-size: 1em;
 	margin-left: 1em;
 	margin-top: 1em;
-	padding: 8px 16px;
+	padding: 4px 10px;
 	font-family: "ambleregular";
 	background: #FC7D01;
 	text-transform: uppercase;
@@ -61,7 +61,7 @@
 	-o-transition: all 0.5s ease-in-out;
 	transition: all 0.5s ease-in-out;
 	-webkit-apperance: none;
-	width: 10px;
+	width: 8px;
 	height: 8px;
 }
 
