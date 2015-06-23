@@ -137,4 +137,75 @@ public class OrderModel {
 		
 		return result;
 	}
+	
+	/*
+	 * month:1-12;
+	 */
+	public static double getFinancialForMonth(int month){
+		String sql;
+		if(month < 10){
+			sql = "select sum(m.price) as result from orders o,hall h,movie m where o.periodId=h.Id and h.movieId=m.id and o.date like '%-0"+month+"-%'";
+		}else{
+			sql = "select sum(m.price) as result from orders o,hall h,movie m where o.periodId=h.Id and h.movieId=m.id and o.date like '%-"+month+"-%'";
+		}
+		Connection con = DBTools.getConnection();
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.execute();
+			ResultSet rs = ps.getResultSet();
+			while(rs.next()){
+				double result = rs.getDouble("result");
+				return result;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0.0;
+	}
+	
+	public static double[] typeDetailForMonth(int month){
+		String[] types = {"动作","惊悚", "剧情","动画","喜剧","警匪","灾难","恐怖", "爱情","科幻",};
+		double[] result = new double[10];
+		assert(types.length==result.length);
+		String sql;
+		Connection con = DBTools.getConnection();
+		for(int i = 0; i < types.length ;i++){
+			String type = types[i];
+			if(month < 10){
+				sql = "select sum(m.price) as result from orders o,hall h,movie m where o.periodId=h.Id and h.movieId=m.id and o.date like '%-0"+month+"-%' and m.type like '%"+type+"%'" ;
+			}else{
+				sql = "select sum(m.price) as result from orders o,hall h,movie m where o.periodId=h.Id and h.movieId=m.id and o.date like '%-"+month+"-%' and m.type like '%"+type+"%'";
+			}
+			
+			try {
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.execute();
+				ResultSet rs = ps.getResultSet();
+				while(rs.next()){
+					double temp = rs.getDouble(1);
+					result[i] = temp;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally{
+				
+			}
+		}
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

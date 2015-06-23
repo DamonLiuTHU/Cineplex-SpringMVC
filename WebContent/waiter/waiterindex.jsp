@@ -18,5 +18,7 @@
 	<li><a href="getPeriodSeatUsage">查看不同时段上座率统计</a>
 	</ul>
 </div>
+
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

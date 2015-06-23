@@ -174,4 +174,41 @@ public class HallModel {
 		}
 		return result;
 	}
+	
+	public static double[] getHallFinancialCondition(){
+		double[] result= null;
+		ArrayList<Integer> halls = getHallList();
+		result = new double[halls.size()];
+		for(int i = 0 ;i < halls.size() ;i++){
+			int hallId = halls.get(i);
+			result[i] = getHallFinancaialCondition(hallId);
+		}
+		return result;
+	}
+	
+	private static double getHallFinancaialCondition(int hallId){
+		String sql = "select sum(m.price) as result from orders o,hall h,movie m where h.hallId=? and o.periodId=h.Id and h.movieId=m.id";
+		Connection con = DBTools.getConnection();
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, hallId);
+			ps.execute();
+			ResultSet rs = ps.getResultSet();
+			while (rs.next()) {
+				double result = rs.getDouble("result");
+				return result;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0.0;
+	}
 }
