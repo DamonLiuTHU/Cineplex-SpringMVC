@@ -1,12 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 	   <div class="footer myfooter">
    	  <div class="wrap">	
 	     <div class="section group">
@@ -59,7 +50,7 @@
 				</div>
 			</div>
 			 <div class="copy_right">
-				<p>Company Name Â© All rights Reseverd | Design by  <a href="http://w3layouts.com">W3Layouts</a> </p>
+				<p>Company Name © All rights Reseverd | Design by  <a href="http://w3layouts.com">W3Layouts</a> </p>
 		   </div>			
         </div>
     </div>
@@ -72,5 +63,3 @@
 		});
 	</script>
 	<a href="#" id="toTop"><span id="toTopHover"> </span></a>
-</body>
-</html>
