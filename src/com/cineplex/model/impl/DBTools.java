@@ -17,7 +17,6 @@ public class DBTools {
 			DataSource ds = (DataSource) ctx
 					.lookup("java:comp/env/jdbc/cineplex");
 			Connection con = ds.getConnection();
-		
 			return con;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

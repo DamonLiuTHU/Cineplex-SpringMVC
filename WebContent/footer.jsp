@@ -7,16 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	   <div class="footer">
+	   <div class="footer myfooter">
    	  <div class="wrap">	
 	     <div class="section group">
 				<div class="col_1_of_4 span_1_of_4">
 						<h4>Information</h4>
 						<ul>
 						<li><a href="#">About Us</a></li>
-						<li><a href="#">Customer Service</a></li>
-						<li><a href="./manager/mlogin.do">Manager Port</a></li>
-						<li><a href="./waiter/login">Waiter Port</a></li>
+						<li><a href="<%=request.getContextPath()%>/login.jsp">User Port</a></li>
+						<li><a href="<%=request.getContextPath()%>/manager/mlogin.do">Manager Port</a></li>
+						<li><a href="<%=request.getContextPath()%>/waiter/login">Waiter Port</a></li>
 						<li><a href="contact.html">Contact Us</a></li>
 						</ul>
 					</div>
@@ -49,10 +49,10 @@
 						<div class="social-icons">
 							<h4>Follow Us</h4>
 					   		  <ul>
-							      <li><a href="#" target="_blank"><img src="./images/facebook.png" alt="" /></a></li>
-							      <li><a href="#" target="_blank"><img src="./images/twitter.png" alt="" /></a></li>
-							      <li><a href="#" target="_blank"><img src="./images/skype.png" alt="" /> </a></li>
-							      <li><a href="#" target="_blank"> <img src="./images/linkedin.png" alt="" /></a></li>
+							      <li><a href="#" target="_blank"><img src="<%=request.getContextPath() %>/images/facebook.png" alt="" /></a></li>
+							      <li><a href="#" target="_blank"><img src="<%=request.getContextPath() %>/images/twitter.png" alt="" /></a></li>
+							      <li><a href="#" target="_blank"><img src="<%=request.getContextPath() %>/images/skype.png" alt="" /> </a></li>
+							      <li><a href="#" target="_blank"> <img src="<%=request.getContextPath() %>/images/linkedin.png" alt="" /></a></li>
 							      <div class="clear"></div>
 						     </ul>
    	 					</div>

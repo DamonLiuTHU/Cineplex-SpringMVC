@@ -20,8 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cineplex.model.forms.LoginForm;
 import com.cineplex.model.forms.PlanForm;
+import com.cineplex.model.impl.HallModel;
 import com.cineplex.model.impl.ManagerModel;
 import com.cineplex.model.impl.MovieModel;
+import com.cineplex.model.impl.OrderModel;
 import com.cineplex.model.impl.StatisticsModel;
 import com.cineplex.model.tables.Movie;
 import com.cineplex.model.tables.Statistics;
@@ -182,12 +184,37 @@ public class ManagerController{
 	}
 	
 	//通过对座位不同位置的统计来为经理制定优惠政策提供决策支持。
-		@RequestMapping("/getSeatUsageRate")
-		public ModelAndView getSeatUsageRatePage(){
-			ModelAndView mav = new ModelAndView("manager/seat_detail");
-			
-			
-			return mav;
-		}
+	@RequestMapping("/getSeatUsageRate")
+	public ModelAndView getSeatUsageRatePage(){
+		ModelAndView mav = new ModelAndView("manager/seat_detail");
+		
+		
+		return mav;
+	}
 	
+	
+	@RequestMapping("/getFinancialPage")
+	public ModelAndView getFinancialPage(){
+		ModelAndView mav = new ModelAndView("manager/financial");
+		
+		
+		return mav;
+	}
+	
+	@RequestMapping("/getTypeDetailForMonth")
+	public ModelAndView getTypeDetialPage(@RequestParam("month") String month){
+		ModelAndView mav = new ModelAndView("manager/typedetail");
+		mav.addObject("month",month);
+		double[] data = OrderModel.typeDetailForMonth(Integer.parseInt(month));
+		mav.addObject("data",data);
+		return mav;
+	}
+	
+	@RequestMapping("/getHallFinancialCondition")
+	public ModelAndView getHallDetialPage(){
+		ModelAndView mav = new ModelAndView("manager/hallDetail");
+		double[] data = HallModel.getHallFinancialCondition();
+		mav.addObject("data",data);
+		return mav;
+	}
 }

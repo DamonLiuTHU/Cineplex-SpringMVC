@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+.myfooter{position:fixed; bottom:0px; left:0px; height:??px; width:100%; z-index:999;}
 
 .mytable {
 	width: 60%;

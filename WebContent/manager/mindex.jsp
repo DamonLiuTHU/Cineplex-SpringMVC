@@ -16,6 +16,8 @@
 	<li><a href="getPublishPage"> 发布电影</a></li>
 	<li><a href="getSeatUsageRate">查看座位使用率</a>
 	<li><a href="getWaiterPlanSuccessRate">查看服务员计划成功率</a></li>
+	<li><a href="getFinancialPage">查看财务统计</a></li>
+	<li><a href="getHallFinancialCondition">查看不同影厅营业情况</a></li>
 </div>
 </body>
 </html>
